@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <title>Programação Web Back End</title>
+</head>
+
+<header class="login">
+    <div class="fundo_menu">
+        <div class="logo_senai">
+            <a href="index.html"><img src="{% static 'imagens/logo_senai.png' %}" /></a>
+        </div>
+        <div class="nome_sistema">
+             Programação Web Back End<br>
+             Sistema de Apoio aos Professores
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="botao_login">
+            <a href="accounts/logout"><button class="btn btn_login">Logout</button></a>
+        </div>
+        {% else %}
+        <div class="botao_login">
+            <a href="accounts/login"><button class="btn btn_login">Login</button></a>
+        </div>
+        {% endif %}
+
+    </div>
+</header> 
+<header class="menu_principal">
+    
+</header>   
+
+
+
+<nav class="menu">
+    <ul>
+
+        <li><a href="">Cadastros</a>
+            <ul>
+                <li><a href="">Professores</a></li>
+                <li><a href="">Turmas</a></li>
+                <li><a href="">Atividades</a></li>
+            </ul>
+        </li>   
+        <li><a href="">Consultar</a>
+            <ul>
+                <li><a href="Cons_Cliente.html">Professores</a></li>
+                <li><a href="Cons_Depto.html">Turmas</a></li>
+                <li><a href="Cons_Atendente.html">Atividades</a></li>
+            </ul>
+        </li>
+        <li><a href="">Registrar Turmas do Professor</a></li>
+        <li><a href="">Registrar Atividades da Turma</a></li>
+        <li> | Usuário logado: {{usuario_logado}}</a></li>
+
+    </ul> 
+</nav>      
+<body >
+
+
+
+
+
+
+
+
+</body>
+
+
+<!-- <footer class="rodape">
+    <div class="fundo_menu">
+        
+        <div class="rodape1">
+            Escola e Faculdade de Tecnologia Senai "Roberto Mange"<br>
+            Curso de Análise e Desenvolvimento de Sistemas.<br>
+         
+        </div>  
+        
+        
+    </div>
+</footer>  -->
+
+</html>

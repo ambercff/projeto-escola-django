@@ -1,0 +1,54 @@
+{% load static %}
+<!Doctype HTML>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title> Login </title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/tela_professor.css' %}">
+    	<script src="https://kit.fontawesome.com/be07557a2e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header>
+		<nav class="navbar">
+			<h3> Olá, {{request.dados_professor.nome}} </h3>
+			<div class="logout-container">
+				<h3> Sair </h3>
+			 	<form method="POST">
+						<button type="submit"><i class="fa-solid fa-right-from-bracket"></i></button>
+				</form>
+			</div>
+		</nav>
+	</header>
+
+	<div class="general-container">
+		<div class="table-container">
+			<div class="container-cadastro">
+                <p> Turmas </p>
+				<button type="submit" class="btn-cadastro"> Cadastrar Turma </button>
+			</div>
+		
+			<table class="tabela-turmas">
+				<thead>
+					<th> ID </th>
+					<th> Nome </th>
+					<th> Ações </th>
+				</thead>
+				<tbody>
+					{% for turma in turmas_professor %}
+						<tr>
+							<td> {{turma.id}} </td>
+							<td> {{turma.nome_turma}} </td>
+							<td> <button type="submit" class="btn-excluir"> Excluir </button>
+								<button type="submit" class="btn-visualizar"> Visualizar </button>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+
+
+</html>

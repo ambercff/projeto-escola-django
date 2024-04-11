@@ -1,0 +1,58 @@
+{% load static %}
+<!Doctype HTML>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title> Login </title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/tela_atividades.css' %}">
+    	<script src="https://kit.fontawesome.com/be07557a2e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header>
+		<nav class="navbar">
+			<h3> Olá, professor </h3>
+			<div class="logout-container">
+				<h3> Sair </h3>
+			 	<form action="logout" method="POST">
+                            		<button type="submit"><i class="fa-solid fa-right-from-bracket"></i></button>
+                        	</form>
+			</div>
+		</nav>
+	</header>
+
+	<div class="general-container">
+		<div class="table-container">
+			<div class="container-cadastro">
+                <p> Turma: Desenvolvimento de Sistemas SA01 </p>
+				<button type="submit" class="btn-cadastro"> Cadastrar Atividade </button>
+			</div>
+
+            <div class="tabela-turmas">
+                <table>
+                    <thead>
+                        <th> ID </th>
+                        <th> Nome </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> 1 </td>
+                            <td> Desenvolvimento de Sistemas SA01 </td>
+                        </tr>
+                        <tr>
+                            <td> 2 </td>
+                            <td> Redes de Computadores SN02 </td>
+                        </tr>
+                        <tr>
+                            <td> 3 </td>
+                            <td> Desenvolvimento de Sistemas B402 </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+		</div>
+	</div>
+
+</body>
+
+
+</html>

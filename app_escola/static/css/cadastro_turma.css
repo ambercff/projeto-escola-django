@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+	font-family: 'Montserrat', sans-serif;
+}
+
+body {
+	background-image: url("../imagens/fundo.svg");
+	background-size: cover;
+}
+
+
+.form-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.form {
+	background-color: white;
+	border-radius: 40px;
+	width: 30rem;
+	height: 20rem;
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+	
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: space-around;
+}
+
+h1 {
+	display: flex;
+	justify-content: center;
+	padding-top: 25px;
+	font-size: 40px;
+}
+
+.btn-container {
+	display: flex;
+	justify-content: center;
+}
+
+.login-form input {
+	padding: 8px;
+	width: 200px;
+	border-radius: 10px;
+	border: 0.5px solid black;
+}
+
+
+.login-form label {
+	font-size: 17px;
+	font-weight: 600;
+}
+
+.labels {
+	display: flex;
+	gap: 25px;
+}
+
+.label-login, .label-senha {
+	display: flex;
+    	flex-direction: column;
+	gap: 10px;
+}
+
+.btn-container button {
+	width: 150px;
+	padding: 8px;
+	border-radius: 10px;
+	background-color: black;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+
+.btn-container button:hover {
+	background-color: #4f4f4f;
+}
+

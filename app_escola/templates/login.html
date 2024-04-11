@@ -1,0 +1,40 @@
+{% load static %}
+<!Doctype HTML>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title> Login </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+	<div class="form-container">
+		<div class="form">
+			<h1> Login </h1>
+			{% if message %}
+				<p>{{message}}</p>
+			{% endif %}
+			<form method="POST" class="login-form" action="{% url 'login' %}">
+				{% csrf_token %}
+			
+				<div class="labels">
+					<div class="label-login">
+						<label> Login: </label>
+						<input type="text" name="email" placeholder="user@email.com">
+					</div>
+
+					<div class="label-senha">
+						<label> Senha: </label>
+						<input type="password" name="senha" placeholder="ex:1234">
+					</div>
+				</div>
+
+				<div class="btn-container"> <button type="submit"> Enviar </button> </div>
+			</form>
+		</div>
+	</div>
+
+</body>
+
+
+</html>

@@ -1,0 +1,31 @@
+{% load static %}
+<!Doctype HTML>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title> Login </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cadastro_turma.css' %}">
+</head>
+<body>
+
+	<div class="form-container">
+		<div class="form">
+			<h1> Cadastro Turma </h1>
+			<form method="POST" class="login-form">
+			
+				<div class="labels">
+					<div class="label-login">
+						<label> Nome turma: </label>
+						<input type="text" name="nome_turma">
+					</div>
+				</div>
+                <div class="btn-container"> <button type="submit"> Enviar </button> </div>
+
+			</form>
+		</div>
+	</div>
+
+</body>
+
+
+</html>
