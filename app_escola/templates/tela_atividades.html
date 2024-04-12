@@ -14,8 +14,8 @@
 			<div class="logout-container">
 				<h3> Sair </h3>
 			 	<form action="logout" method="POST">
-                            		<button type="submit"><i class="fa-solid fa-right-from-bracket"></i></button>
-                        	</form>
+                    <button type="submit"><i class="fa-solid fa-right-from-bracket"></i></button>
+                </form>
 			</div>
 		</nav>
 	</header>
@@ -23,31 +23,31 @@
 	<div class="general-container">
 		<div class="table-container">
 			<div class="container-cadastro">
-                <p> Turma: Desenvolvimento de Sistemas SA01 </p>
-				<button type="submit" class="btn-cadastro"> Cadastrar Atividade </button>
+                <p> Turma: {{nome_turma}} </p>
+				<a href="{% url 'cadastro_atividade' id_turma=turma_id %}"><button type="submit" class="btn-cadastro"> Cadastrar Atividade </button></a>
 			</div>
-
-            <div class="tabela-turmas">
-                <table>
-                    <thead>
-                        <th> ID </th>
-                        <th> Nome </th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td> 1 </td>
-                            <td> Desenvolvimento de Sistemas SA01 </td>
-                        </tr>
-                        <tr>
-                            <td> 2 </td>
-                            <td> Redes de Computadores SN02 </td>
-                        </tr>
-                        <tr>
-                            <td> 3 </td>
-                            <td> Desenvolvimento de Sistemas B402 </td>
-                        </tr>
-                    </tbody>
-                </table>
+			{% if atividades_turma %}
+				<div class="tabela-turmas">
+					<table>
+						<thead>
+							<th> ID </th>
+							<th> Nome </th>
+						</thead>
+						<tbody>
+							{% for atividade in atividades_turma %}
+								<tr>
+									<td> {{ atividade.id }} </td>
+									<td> {{ atividade.nome_atividade }} </td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			{% else %}
+				<div style="display: flex; justify-content: center; margin-top: 30px;">
+					<p style="font-size: 20px; font-weight: bold; text-decoration: underline;"> Não há atividades cadastradas para essa turma!</p>
+				</div>
+			{% endif %}
             </div>
 		</div>
 	</div>

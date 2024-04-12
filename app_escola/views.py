@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from hashlib import sha256
 from django.db import connection, transaction
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate;
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -46,8 +46,8 @@ from app_escola.models import *
 
 #     print("Finish")
 
-def index(request):
-    return render(request, 'index.html')
+# def index(request):
+#     return render(request, 'index.html')
 
 def login(request):
 
@@ -90,15 +90,50 @@ def logout(request):
 def tela_professor(request):
     return render(request, 'tela_professor.html')
 
-def cadastro_turma(request):
-    
-    return render(request, 'cadastro_turma.html')
+def cadastro_turma(request, id_professor):
+    if request.method == 'POST':
+        nome_turma = request.POST["nome_turma"] 
+        professor = Professor.objects.get(id=id_professor)
+        with transaction.atomic():
+            grava_turma = Turma(nome_turma=nome_turma, id_professor=professor)
+            grava_turma.save()
+        turmas_professor = Turma.objects.filter(id_professor=id_professor)
 
-def tela_atividades(request):
-    return render(request, 'tela_atividades.html')
+        return render(request, "tela_professor.html", {
+            "nome": professor,
+            "turmas_professor": turmas_professor,
+            "id_logado": id_professor
+        })
+    usuario_logado = Professor.objects.filter(id=id_professor).values("nome", "id")
+    usuario_logado = usuario_logado[0]
+    usuario_logado = usuario_logado['nome']
+    return render(request, 'cadastro_turma.html', {
+        "usuario_logado": usuario_logado,
+        "id_logado": id_professor
+    })
 
-def cadastro_atividade(request):
-    return render(request, 'cadastro_atividade.html')
+def tela_atividades(request, id_turma):
+    atividades_turma = Atividade.objects.filter(id_turma_id = id_turma)
+    turma = Turma.objects.filter(pk=id_turma).first()
+    return render(request, 'tela_atividades.html', {
+        "atividades_turma": atividades_turma,
+        "turma_id": id_turma,
+        "nome_turma": turma.nome_turma
+    })
+
+def cadastro_atividade(request, id_turma):
+    if request.method == 'POST':
+        desc_atividade = request.POST["desc_atividade"]
+        turma = Turma.objects.get(pk=id_turma)
+
+        with transaction.atomic():
+            grava_atividade = Atividade(nome_atividade=desc_atividade, id_turma=turma)
+            grava_atividade.save()
+
+        return HttpResponseRedirect(reverse("tela_atividades", args=[id_turma]))
+    return render(request, 'cadastro_atividade.html', {
+        "turma_id": id_turma
+    })
 
 def confirmar_cadastro(request):
     if request.method == "POST":
@@ -107,11 +142,29 @@ def confirmar_cadastro(request):
         senha = request.POST["senha"]
         senha_criptografada = sha256(senha.encode()).hexdigest()
 
-        grava_professor = Professor(nome=nome, email=email, senha=senha_criptografada)
+        with transaction.atomic():
+            grava_professor = Professor(nome=nome, email=email, senha=senha_criptografada)
+            grava_professor.save()
 
-        grava_professor.save()
+        return render(request, "login.html")
+    
+def excluir_turma(request, id_turma):
+    try:
+        with transaction.atomic():
+            turma = Turma.objects.get(pk=id_turma)
+            id_professor = turma.id_professor_id
+            turma.delete()
 
-        login(request, grava_professor)
+            professor = Professor.objects.get(pk=id_professor)
+            turmas_professor = Turma.objects.filter(id_professor=id_professor)
 
-        return HttpResponseRedirect(request, "tela_professor.html")
+        return render(request, "tela_professor.html", {
+            "nome": professor.nome,
+            "turmas_professor": turmas_professor,
+            "id_logado": id_professor
+        })
+    except Turma.DoesNotExist:
+        # Trate aqui o caso em que a turma não existe
+        # Por exemplo, redirecione o usuário para uma página de erro
+        pass
     

@@ -5,16 +5,16 @@
 	<meta charset="UTF-8">
 	<title> Login </title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/tela_professor.css' %}">
-    	<script src="https://kit.fontawesome.com/be07557a2e.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/be07557a2e.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body onLoad="login();">
 	<header>
 		<nav class="navbar">
-			<h3> Olá, {{request.dados_professor.nome}} </h3>
+			<h3> Olá, {{nome}} </h3>
 			<div class="logout-container">
 				<h3> Sair </h3>
 			 	<form method="POST">
-						<button type="submit"><i class="fa-solid fa-right-from-bracket"></i></button>
+					<button type="submit"><i class="fa-solid fa-right-from-bracket"></i></button>
 				</form>
 			</div>
 		</nav>
@@ -24,29 +24,71 @@
 		<div class="table-container">
 			<div class="container-cadastro">
                 <p> Turmas </p>
-				<button type="submit" class="btn-cadastro"> Cadastrar Turma </button>
+				<input type="hidden" name="id_logado" id="id_logado" value="{{id_logado}}">
+				<input type="hidden" name="nome_logado" id="nome_logado" value="{{nome}}">
+				<a href="{% url 'cadastro_turma' id_professor=id_logado %}"><button type="submit" class="btn-cadastro"> Cadastrar Turma </button></a>
 			</div>
 		
-			<table class="tabela-turmas">
-				<thead>
-					<th> ID </th>
-					<th> Nome </th>
-					<th> Ações </th>
-				</thead>
-				<tbody>
-					{% for turma in turmas_professor %}
-						<tr>
-							<td> {{turma.id}} </td>
-							<td> {{turma.nome_turma}} </td>
-							<td> <button type="submit" class="btn-excluir"> Excluir </button>
-								<button type="submit" class="btn-visualizar"> Visualizar </button>
-							</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+			{% if turmas_professor %}
+                <table class="tabela-turmas">
+                    <thead>
+                        <th> ID </th>
+                        <th> Nome </th>
+                        <th> Ações </th>
+                    </thead>
+                    <tbody>
+                        {% for turma in turmas_professor %}
+                            <tr>
+                                <td> {{turma.id}} </td>
+                                <td> {{turma.nome_turma}} </td>
+                                <td class="excluir-icon"> <a href="{% url 'excluir_turma' id_turma=turma.id %}"><i class="fa-solid fa-trash-can"></i> </a> </td>
+                                <td class="visualizar-icon"> <a href="{% url 'tela_atividades' id_turma=turma.id%}"><i class="fa-solid fa-eye"></i> </a> </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+			<div style="display: flex; justify-content: center; margin-top: 30px;">
+				<p style="font-size: 20px; font-weight: bold; text-decoration: underline;"> Não há turmas cadastradas para este professor! </p>
+			</div>
+            {% endif %}
 		</div>
 	</div>
+
+	<script>
+
+		// function login(){
+		// 	const value_id_logado = localStorage.getItem('proj_escola_id_logado');
+		// 	const value_nome_logado = localStorage.getItem('proj_escola_nome_logado');
+		// 	let id_logado = document.getElementById('id_logado').value
+
+		// 	if (value_id_logado == null) {
+		// 		let nome_logado = document.getElementById('nome_logado').value
+		// 		localStorage.setItem('proj_escola_id_logado', id_logado)
+		// 		localStorage.setItem('proj_escola_nome_logado', nome_logado)
+		// 	} else {
+		// 		if (value_id_logado == null || value_id_logado != id_logado) {
+		// 			window.alert('Você não está logado. Faça o login antes de continuar.');
+		// 			window.location.href='../';
+		// 		} else  {
+		// 			document.getElementById('id_logado').value = value_id_logado;
+		// 			document.getElementById('nome_logado').value = value_nome_logado;
+		// 		}
+		// 	}
+		// }
+
+		// function valida_excluir(id){
+		// 	let userConfirmation = confirm("Você tem certeza de que deseja excluir este item?");
+
+		// 	if (userConfirmation){
+		// 		const id = id;
+		// 		const endereco = '/excluir_turma/' + id;
+		// 		window.location.href=endereco;
+		// 	} else {
+		// 		console.log('Operação de exclusão cancelada.');
+		// 	}
+		// }
+	</script>
 
 </body>
 

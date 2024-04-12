@@ -11,12 +11,14 @@
 	<div class="form-container">
 		<div class="form">
 			<h1> Cadastro Turma </h1>
-			<form method="POST" class="login-form">
+			<form method="POST" class="login-form" action="{% url 'cadastro_turma' id_professor=id_logado%}">
+				{% csrf_token %}
 			
 				<div class="labels">
 					<div class="label-login">
 						<label> Nome turma: </label>
 						<input type="text" name="nome_turma">
+						<input type="hidden" name="id_professor" id="id_logado" value="{{id_logado}}">
 					</div>
 				</div>
                 <div class="btn-container"> <button type="submit"> Enviar </button> </div>

@@ -79,7 +79,7 @@ td {
  	padding: 15px;
 }
 
-.btn-cadastro, .btn-excluir, .btn-visualizar {
+.btn-cadastro{
 	padding: 8px;
 	border-radius: 10px;
 	border: none;
@@ -92,22 +92,35 @@ td {
 	background-color: #0066ff;
 }
 
-.btn-excluir {
-	background-color: #d10404;
-}
-
-.btn-visualizar {
-	background-color: #0066ff;
-}
 
 .btn-cadastro:hover {
 	background-color: #0250c4;
 }
 
-.btn-excluir:hover {
-	background-color: #9c0505;
+.visualizar-icon a {
+	text-decoration: none;
+	color: #0066ff;
+	font-size: 20px;
+	align-items: center;
 }
 
-.btn-visualizar:hover {
-	background-color: #0250c4;
+.visualizar-icon:hover {
+	color: #0250c4;;
+}
+
+.excluir-icon, .visualizar-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	border: 1px solid black;
+}
+
+.excluir-icon a {
+	text-decoration: none;
+	color: #d10404;
+	font-size: 20px;
+}
+
+.excluir-icon a:hover {
+	color: #9c0505;
 }

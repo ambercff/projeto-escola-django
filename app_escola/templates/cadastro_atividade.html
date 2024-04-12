@@ -11,12 +11,12 @@
 	<div class="form-container">
 		<div class="form">
 			<h1> Cadastro Atividade </h1>
-			<form method="POST" class="login-form">
-			
+			<form method="POST" class="login-form" action="{% url 'cadastro_atividade' id_turma=turma_id %}">
+				{% csrf_token %}
 				<div class="labels">
 					<div class="label-login">
 						<label> Descrição: </label>
-						<input type="text" name="desc-atividade">
+						<input type="text" name="desc_atividade">
 					</div>
 				</div>
                 <div class="btn-container"> <button type="submit"> Enviar </button> </div>
