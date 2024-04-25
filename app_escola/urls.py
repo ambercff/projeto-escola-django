@@ -10,5 +10,5 @@ urlpatterns = [
     path('cadastro_atividade/<int:id_turma>', views.cadastro_atividade, name='cadastro_atividade'),
     path('confirmar_cadastro', views.confirmar_cadastro, name='confirmar_cadastro'),
     path('excluir_turma/<int:id_turma>', views.excluir_turma, name="excluir_turma"),
-    path('logout', views.logout_view, name="logout")
+    path('atividade_arquivos/<str:nome_arquivo>', views.exibir_arquivo, name='exibir_arquivo')
 ]

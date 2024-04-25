@@ -38,7 +38,7 @@
 									<td> {{ atividade.id }} </td>
 									<td> {{ atividade.nome_atividade }} </td>
 									{% if atividade.arquivo %}
-									<td> <i class="fa-regular fa-file-lines" id="icone_arquivo"></i> </td>
+									<td> <a href="../../{{atividade.arquivo}}">Arquivo </a></td>
 									{% else %}
 									<td> Não há arquivos </td>
 									{% endif %}
