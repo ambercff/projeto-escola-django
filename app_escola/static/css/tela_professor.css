@@ -48,9 +48,13 @@ nav h3 {
 
 .table-container {
 	background-color: white;
-	padding: 50px;
-	border-radius: 30px;
+    padding: 5rem;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+	width: 30%;
 }
+
 
 .container-cadastro {
 	display: flex;
@@ -59,8 +63,10 @@ nav h3 {
     align-items: center;
 }
 .container-cadastro p{
-    font-weight: bold;
+	font-weight: bold;
     font-size: 20px;
+    word-wrap: break-word;
+    max-width: 200px;
 }
 
 table {
@@ -77,6 +83,8 @@ th {
 
 td {
  	padding: 15px;
+	word-wrap: break-word;
+	max-width: 200px;
 }
 
 .btn-cadastro{

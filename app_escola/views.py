@@ -10,44 +10,44 @@ from app_escola.models import *
 
 # Create your views here.
 
-# def initial_population():
-#     cursor = connection.cursor()
+def initial_population():
+    cursor = connection.cursor()
 
-#     senha = "123456"
-#     senha_armazenar = sha256(senha.encode()).hexdigest()
+    senha = "123456"
+    senha_armazenar = sha256(senha.encode()).hexdigest()
 
-#     insert_sql_professor = "INSERT INTO app_escola_professor (nome, email, senha) VALUES "
-#     insert_sql_professor = insert_sql_professor + "('Prof. Barak Obama', 'barak.obama@gmail.com', '" + senha_armazenar + "'),"
-#     insert_sql_professor = insert_sql_professor + "('Prof. Angela Merkel', 'angela.merkel@gmail.com', '" + senha_armazenar + "'),"
-#     insert_sql_professor = insert_sql_professor + "('Prof. Xi Jinping', 'xi.jinping@gmail.com', '" + senha_armazenar + "')"
+    insert_sql_professor = "INSERT INTO app_escola_professor (nome, email, senha) VALUES "
+    insert_sql_professor = insert_sql_professor + "('Prof. Barak Obama', 'barak.obama@gmail.com', '" + senha_armazenar + "'),"
+    insert_sql_professor = insert_sql_professor + "('Prof. Angela Merkel', 'angela.merkel@gmail.com', '" + senha_armazenar + "'),"
+    insert_sql_professor = insert_sql_professor + "('Prof. Xi Jinping', 'xi.jinping@gmail.com', '" + senha_armazenar + "')"
 
-#     cursor.execute(insert_sql_professor)
-#     transaction.atomic()
+    cursor.execute(insert_sql_professor)
+    transaction.atomic()
 
 
-#     # Turma
+    # Turma
 
-#     insert_sql_turma = "INSERT INTO app_escola_turma (nome_turma, id_professor_id) VALUES"
-#     insert_sql_turma = insert_sql_turma + "('1° Semestre - Desenvolvimento de Sistemas', 1),"
-#     insert_sql_turma = insert_sql_turma + "('2° Semestre - Desenvolvimento de Sistemas', 2),"
-#     insert_sql_turma = insert_sql_turma + "('3° Semestre - Desenvolvimento de Sistemas', 3)"
+    insert_sql_turma = "INSERT INTO app_escola_turma (nome_turma, id_professor_id) VALUES"
+    insert_sql_turma = insert_sql_turma + "('1° Semestre - Desenvolvimento de Sistemas', 1),"
+    insert_sql_turma = insert_sql_turma + "('2° Semestre - Desenvolvimento de Sistemas', 2),"
+    insert_sql_turma = insert_sql_turma + "('3° Semestre - Desenvolvimento de Sistemas', 3)"
 
-#     cursor.execute(insert_sql_turma)
-#     transaction.atomic()
+    cursor.execute(insert_sql_turma)
+    transaction.atomic()
 
-#     # Atividade
-#     insert_sql_atividade = "INSERT INTO app_escola_atividade (nome_atividade, id_turma_id) VALUES"
-#     insert_sql_atividade = insert_sql_atividade + "('Apresentar Fundamentos de Programação', 1),"
-#     insert_sql_atividade = insert_sql_atividade + "('Apresentar FrameWork Django', 2),"
-#     insert_sql_atividade = insert_sql_atividade + "('Apresentar conceitos de Gerenciamento de Projetos', 3)"
+    # Atividade
+    insert_sql_atividade = "INSERT INTO app_escola_atividade (nome_atividade, id_turma_id) VALUES"
+    insert_sql_atividade = insert_sql_atividade + "('Apresentar Fundamentos de Programação', 1),"
+    insert_sql_atividade = insert_sql_atividade + "('Apresentar FrameWork Django', 2),"
+    insert_sql_atividade = insert_sql_atividade + "('Apresentar conceitos de Gerenciamento de Projetos', 3)"
 
-#     cursor.execute(insert_sql_atividade)
-#     transaction.atomic()
+    cursor.execute(insert_sql_atividade)
+    transaction.atomic()
 
-#     print("Finish")
+    print("Finish")
 
-# def index(request):
-#     return render(request, 'index.html')
+def index(request):
+    return render(request, 'index.html')
 
 def login(request):
 
@@ -83,9 +83,8 @@ def login(request):
         })
     return render(request, "login.html")
     
-def logout(request):
-    logout(request)
-    return HttpResponseRedirect(reverse("index"))
+def logout_view(request):
+    return render(request, "login.html")
 
 def tela_professor(request):
     return render(request, 'tela_professor.html')
@@ -118,16 +117,20 @@ def tela_atividades(request, id_turma):
     return render(request, 'tela_atividades.html', {
         "atividades_turma": atividades_turma,
         "turma_id": id_turma,
-        "nome_turma": turma.nome_turma
+        "nome_turma": turma.nome_turma,
+        "nome": turma.id_professor
     })
 
 def cadastro_atividade(request, id_turma):
     if request.method == 'POST':
         desc_atividade = request.POST["desc_atividade"]
+        arquivo = request.FILES.get("arquivo")
+        print(f"ARQUIVO: {arquivo}")
         turma = Turma.objects.get(pk=id_turma)
+      
 
         with transaction.atomic():
-            grava_atividade = Atividade(nome_atividade=desc_atividade, id_turma=turma)
+            grava_atividade = Atividade(nome_atividade=desc_atividade, id_turma=turma, arquivo=arquivo)
             grava_atividade.save()
 
         return HttpResponseRedirect(reverse("tela_atividades", args=[id_turma]))

@@ -48,8 +48,11 @@ nav h3 {
 
 .table-container {
 	background-color: white;
-	padding: 50px;
-	border-radius: 30px;
+    padding: 5rem;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+	width: 30%;
 }
 
 .container-cadastro {
@@ -57,17 +60,14 @@ nav h3 {
 	justify-content: space-between;
 	padding-bottom: 2rem;
     align-items: center;
-    gap: 5rem;
 }
 .container-cadastro p{
-    font-weight: bold;
-    font-size: 15px;
+	font-weight: bold;
+    font-size: 20px;
+    word-wrap: break-word;
+    max-width: 200px;
 }
 
-.tabela-turmas {
-    display: flex;
-    justify-content: center;
-}
 
 table {
 	border-collapse: collapse;
@@ -82,7 +82,10 @@ th {
 }
 
 td {
- 	padding: 15px;
+	padding: 15px;
+	word-wrap: break-word;
+	max-width: 200px;
+	
 }
 
 .btn-cadastro, .btn-excluir, .btn-visualizar {
@@ -116,4 +119,8 @@ td {
 
 .btn-visualizar:hover {
 	background-color: #0250c4;
+}
+
+#icone_arquivo {
+	font-size: 20px;
 }

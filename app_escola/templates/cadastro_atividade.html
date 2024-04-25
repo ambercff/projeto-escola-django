@@ -11,12 +11,14 @@
 	<div class="form-container">
 		<div class="form">
 			<h1> Cadastro Atividade </h1>
-			<form method="POST" class="login-form" action="{% url 'cadastro_atividade' id_turma=turma_id %}">
+			<form method="POST" class="login-form" action="{% url 'cadastro_atividade' id_turma=turma_id %}" enctype="multipart/form-data">
 				{% csrf_token %}
 				<div class="labels">
 					<div class="label-login">
 						<label> Descrição: </label>
 						<input type="text" name="desc_atividade">
+						<label> Arquivo: </label>
+						<input type="file" name="arquivo" id="arquivo">
 					</div>
 				</div>
                 <div class="btn-container"> <button type="submit"> Enviar </button> </div>

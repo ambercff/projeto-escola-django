@@ -10,12 +10,10 @@
 <body>
 	<header>
 		<nav class="navbar">
-			<h3> Olá, professor </h3>
+			<h3> Olá, {{nome}} </h3>
 			<div class="logout-container">
 				<h3> Sair </h3>
-			 	<form action="logout" method="POST">
-                    <button type="submit"><i class="fa-solid fa-right-from-bracket"></i></button>
-                </form>
+				<a href="{%url 'login' %}"><button type="submit"><i class="fa-solid fa-right-from-bracket"></i></button></a>
 			</div>
 		</nav>
 	</header>
@@ -27,22 +25,28 @@
 				<a href="{% url 'cadastro_atividade' id_turma=turma_id %}"><button type="submit" class="btn-cadastro"> Cadastrar Atividade </button></a>
 			</div>
 			{% if atividades_turma %}
-				<div class="tabela-turmas">
+				<!-- <div class="tabela-turmas"> -->
 					<table>
 						<thead>
 							<th> ID </th>
 							<th> Nome </th>
+							<th> Arquivos </th>
 						</thead>
 						<tbody>
 							{% for atividade in atividades_turma %}
 								<tr>
 									<td> {{ atividade.id }} </td>
 									<td> {{ atividade.nome_atividade }} </td>
+									{% if atividade.arquivo %}
+									<td> <i class="fa-regular fa-file-lines" id="icone_arquivo"></i> </td>
+									{% else %}
+									<td> Não há arquivos </td>
+									{% endif %}
 								</tr>
 							{% endfor %}
 						</tbody>
 					</table>
-				</div>
+				<!-- </div> -->
 			{% else %}
 				<div style="display: flex; justify-content: center; margin-top: 30px;">
 					<p style="font-size: 20px; font-weight: bold; text-decoration: underline;"> Não há atividades cadastradas para essa turma!</p>
