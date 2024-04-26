@@ -111,8 +111,10 @@ td {
 
 .btn-cadastro:hover {
 	background-color: #0250c4;
+	transform: scale(1.05);
+	background-position: -60px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
-
 .btn-excluir:hover {
 	background-color: #9c0505;
 }
@@ -123,4 +125,28 @@ td {
 
 #icone_arquivo {
 	font-size: 20px;
+}
+
+.btn-excel {
+	padding: 8px;
+	border-radius: 10px;
+	border: none;
+	color: white;
+	cursor: pointer;
+	width: 180px;
+	background-color: #009e03;
+}
+
+.btn-excel:hover {
+	background-color: #008a02;
+	transform: scale(1.05);
+	background-position: -60px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.container-btns {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }

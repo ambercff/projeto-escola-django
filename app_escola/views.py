@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate;
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+import openpyxl
 
 from app_escola.models import *
 
@@ -189,3 +190,45 @@ def exibir_arquivo(request, nome_arquivo):
         return resposta
     else:
         return HttpResponse("Arquivo não encontrado", status=404)
+    
+def exportar_para_excel_turmas(request):
+    dados_turma = Turma.objects.all()
+
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+    sheet.title = "Turmas"
+
+    sheet['A1'] = "ID"
+    sheet['B1'] = "Nome da Turma"
+
+    for index, turma in enumerate(dados_turma, start=2):
+
+        sheet[f'A{index}'] = turma.id
+        sheet[f'B{index}'] = turma.nome_turma
+
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=turma.xlsx'
+    workbook.save(response)
+
+    return response
+
+def exportar_para_excel_atividades(request):
+    dados_atividades = Atividade.objects.all()
+
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+    sheet.title = "Atividades"
+
+    sheet['A1'] = "ID"
+    sheet['B1'] = "Nome da Atividade"
+    sheet['C1'] = "Turma"
+
+    for index, atividade in enumerate(dados_atividades, start=2):
+        sheet[f'A{index}'] = atividade.id
+        sheet[f'B{index}'] = atividade.nome_atividade
+        sheet[f'C{index}'] = atividade.id_turma.nome_turma
+
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=atividades.xlsx'
+        workbook.save(response)
+        return response

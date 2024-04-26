@@ -22,7 +22,10 @@
 		<div class="table-container">
 			<div class="container-cadastro">
                 <p> Turma: {{nome_turma}} </p>
-				<a href="{% url 'cadastro_atividade' id_turma=turma_id %}"><button type="submit" class="btn-cadastro"> Cadastrar Atividade </button></a>
+				<div class="container-btns">
+					<a href="{% url 'cadastro_atividade' id_turma=turma_id %}"><button type="submit" class="btn-cadastro"> Cadastrar Atividade </button></a>
+					<a href="{% url 'exportar_excel_atividade' %}"><button type="submit" class="btn-excel"> Exportar para Excel </button></a>
+				</div>
 			</div>
 			{% if atividades_turma %}
 				<!-- <div class="tabela-turmas"> -->
@@ -38,7 +41,7 @@
 									<td> {{ atividade.id }} </td>
 									<td> {{ atividade.nome_atividade }} </td>
 									{% if atividade.arquivo %}
-									<td> <a href="../../{{atividade.arquivo}}">Arquivo </a></td>
+									<td> <a href="../../{{atividade.arquivo}}"><i class="fa-regular fa-file-lines" id="icone_arquivo"></i></a></td>
 									{% else %}
 									<td> Não há arquivos </td>
 									{% endif %}
